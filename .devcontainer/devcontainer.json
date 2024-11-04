@@ -1,5 +1,5 @@
 {
-    "name": "Python Dev Environment",
+    "name": "R Dev Environment",
     "build": {
         "dockerfile": "../docker/Dockerfile"
     },
@@ -8,13 +8,13 @@
         "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
     ],
     "extensions": [
-        "ms-python.python",
+        "Ikuyadeu.r",  // R extension for VSCode
         "ms-azuretools.vscode-docker",
-        "ms-toolsai.jupyter",
         "ms-vscode-remote.remote-containers"
     ],
     "settings": {
-        "python.defaultInterpreterPath": "/usr/local/bin/python"
+        "r.rterm.linux": "/usr/local/bin/R",  // path to the R interpreter
+        "r.lsp.path": "/usr/local/bin/R"  // Language server for R
     },
     "remoteUser": "root"
 }

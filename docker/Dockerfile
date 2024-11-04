@@ -1,17 +1,14 @@
-# Use the latest Python image as the base
-FROM python:latest
+# Use the latest R image as the base
+FROM rocker/r-ver:latest
 
 # Set the working directory in the container
-WORKDIR /workspace
+WORKDIR /app
 
-# Copy only the requirements file first (helps with Docker layer caching)
-COPY requirements.txt /workspace/
+# Install any necessary R packages (optional, specify packages if needed)
+# RUN R -e "install.packages(c('dplyr', 'ggplot2'))"
 
-# Install the dependencies from requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+# Copy your R script files into the container
+COPY . .
 
-# Copy all contents into the container (for the initial build only)
-COPY . /workspace/
-
-# Start Jupyter Notebook server by default
-CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--no-browser", "--allow-root"]
+# Set up default command to start an interactive R session
+CMD ["R"]

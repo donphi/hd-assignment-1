@@ -1,173 +1,139 @@
-# Data Science Project Template
+# Assessment 1: Data Analysis (R Programming)
 
-## Overview
+### Health Data Science (7HMNT032W)
 
-This project template enables data scientists to use **Visual Studio Code** with a consistent and isolated Docker environment. It’s cross-platform, supporting **Windows**, **macOS**, and **Linux**—ideal for AI and data science work. With this setup, all dependencies are managed within Docker, eliminating the need for local Python environment management. This ensures version control and reproducibility across platforms using Docker and Visual Studio Code.
+**University of Westminster**
 
-## Prerequisites
+**Submission Date:** 20 November 2024**Student Name:** Donald Philp
 
-To get started, you’ll need to install the following on your computer:
-1. **Docker** – Download and install Docker for your operating system:
-   - [Docker for Windows](https://docs.docker.com/desktop/install/windows-install/)
-   - [Docker for macOS](https://docs.docker.com/desktop/install/mac-install/)
-   - [Docker for Linux](https://docs.docker.com/desktop/install/linux-install/)
-2. **Visual Studio Code (VS Code)** – Download and install [VS Code](https://code.visualstudio.com/).
-3. **Git** – Git is often pre-installed on Linux, but you may need to install it on Windows and macOS.
-   - [Git Installation Guide](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-
-   > Note: You’ll also need the **Dev Containers** extension in VS Code, which we’ll cover in the installation steps.
-
-## Step-by-Step Installation Guide
-
-Follow these steps to set up this template on any system:
-
-### Step 1: Clone the Repository
-
-1. Open a terminal on your computer.
-2. Run the following command to clone this template from GitHub:
-   ```bash
-   git clone https://github.com/donphi/data-science-template.git
-   ```
-3. Navigate to the newly cloned folder:
-   ```bash
-   cd data-science-template
-   ```
-
-### Step 2: Open the Folder in Visual Studio Code
-
-1. Launch **Visual Studio Code**.
-2. Click on **File > Open Folder** and select the root folder of the project (`data-science-template`).
-3. Once opened, you should see a prompt at the bottom of VS Code asking if you want to "Reopen in Container." Click **Reopen in Container**.
-
-   > **Note**: If you don’t see this prompt, ensure the **Dev Containers** extension is installed in VS Code.
-
-### Step 3: Verify the Dev Container is Running
-
-Once VS Code loads the container:
-- Confirm that all project folders (e.g., `data`, `models`, `notebooks`) are visible in the left sidebar.
-- Check the bottom-left corner of VS Code for a green icon indicating the container is active.
-
-### Step 4: Working and Saving Changes
-
-- You’re now ready to work within the container! Any code changes or new files will be saved directly in your project directory.
-- When you’re ready to update your work on GitHub, use the following commands to commit and push changes:
-  ```bash
-  git add .
-  git commit -m "Describe your changes here"
-  git push
-  ```
-
-   > **Important**: The `data` folder is ignored by default (based on `.gitignore`) to prevent large or sensitive files from being tracked in Git.
-
-## Alternative Setup (Without Visual Studio Code)
-
-If you’re not using Visual Studio Code, you can still use the `Dockerfile` and `requirements.txt` to set up the environment directly with Docker.
-
-1. **Build the Docker Image**:
-   ```bash
-   docker build -t your_project_name -f docker/Dockerfile .
-   ```
-2. **Run the Docker Container**:
-   ```bash
-   docker run --rm -it --env-file docker/.env -v $(pwd):/workspace your_project_name
-   ```
-   - The `--env-file` option loads environment variables from `.env`.
-   - The `-v $(pwd):/workspace` option mounts your project directory to `/workspace` inside the container.
-
-This setup gives you a similar environment to the Dev Container in VS Code.
+👋 Welcome to my repository for **Assessment 1** of the Health Data Science module, part of the MSc Artificial Intelligence program at the **University of Westminster**! This project focused on learning the basics of **R programming** and applying data analysis techniques to solve healthcare challenges. Below, you'll find the details and file structure of the repository. Enjoy exploring! 🚀
 
 ---
 
-## Docker and Devcontainer Setup for Environment Consistency
+## 📂 Contents
 
-This template uses Docker and VS Code’s Dev Container configuration to ensure consistency and avoid conflicts between local dependencies on different systems.
+- **File Structure**
+- **Data**
+- **Notebooks**
+- **Reports**
+- **Usage**
+- **Assignment Overview**
+- **Learning Outcomes**
+- **Notes**
 
-### Setup Instructions (If Using Docker Directly)
+---
 
-1. **Build the Docker Image**  
-   Run the following command to build the Docker image from the `Dockerfile` in the `docker` folder:
-   ```bash
-   docker build -t your_project_name -f docker/Dockerfile .
-   ```
+## 🗂️ File Structure
 
-2. **Run the Docker Container**  
-   Start a container with the following command:
-   ```bash
-   docker run --rm -it --env-file docker/.env -v $(pwd):/workspace your_project_name
-   ```
-
-3. **Environment Variables**  
-   If you don’t want to use the `.env.example` file, you can skip the `.env` setup entirely for Docker. In this case, environment variables can be defined directly in the `docker run` command, like this:
-   ```bash
-   docker run --rm -it -e VARIABLE_NAME=value -v $(pwd):/workspace your_project_name
-   ```
-   - Replace `VARIABLE_NAME` and `value` with each environment variable and its value.
-   - This method is helpful for quickly setting variables without needing a separate `.env` file but may not be ideal for more complex configurations.
-   - If you don’t need certain variables, you can omit `-e VARIABLE_NAME=value` entirely from the command.
-
-4. **Copying `.env.example` for Project-Specific Configurations**  
-   Copy `.env.example` to `.env` and update variables as needed:
-   ```bash
-   cp docker/.env.example docker/.env  # For Linux/macOS
-   copy docker\.env.example docker\.env  # For Windows
-   ```
-
-### Managing Package Dependencies
-
-- **Add Dependencies**: Add any required dependencies to `docker/requirements.txt`.
-- **Install Dependencies in Docker**: When building the Docker image, all dependencies from `requirements.txt` will be installed automatically.
-
-## Project Organization
+This repository is organized as follows:
 
 ```
-├── .devcontainer               <- Devcontainer files for VS Code Docker setup.
-│   └── devcontainer.json       <- VS Code configuration for dev container support.
-│
-├── docker                      <- Docker-specific files, including Dockerfile and environment files.
-│   ├── Dockerfile              <- Dockerfile defining the project environment.
-│   ├── .env.example            <- Template for environment variables, to be copied to `.env`.
-│   └── requirements.txt        <- List of dependencies for the Docker environment.
-│
-├── README.md                   <- The top-level README for developers using this project
-│
 ├── data
-│   ├── external                <- Data from third party sources
-│   ├── interim                 <- Intermediate data that has been transformed
-│   ├── processed               <- The final, canonical data sets for modeling
-│   └── raw                     <- The original, immutable data dump
-│
-├── models                      <- Trained and serialized models, model predictions, or model summaries
-│
-├── notebooks                   <- Jupyter notebooks. Naming convention is a number (for ordering),
-│                                  the creator's initials, and a short `-` delimited description, e.g.
-│                                  `1.0-jqp-initial-data-exploration`
-│
-├── references                  <- Data dictionaries, manuals, and all other explanatory materials
-│
-├── reports                     <- Generated analysis as HTML, PDF, LaTeX, etc.
-│   └── figures                 <- Generated graphics and figures to be used in reporting
-│
-└── src                         <- Source code for this project
-    │
-    ├── __init__.py             <- Makes src a Python module
-    │
-    ├── config.py               <- Store useful variables and configuration
-    │
-    ├── dataset.py              <- Scripts to download or generate data
-    │
-    ├── features.py             <- Code to create features for modeling
-    │
-    ├── modeling                <- Code for training and inference
-    │   ├── __init__.py 
-    │   ├── predict.py          <- Code to run model inference with trained models          
-    │   └── train.py            <- Code to train models
-    │
-    ├── plots.py                <- Code to create visualizations 
-    │
-    └── services                <- Service classes to connect with external platforms, tools, or APIs
-        └── __init__.py 
+│   └── raw
+│       ├── abalone.data                                   # Dataset for Question 4
+│       ├── abalone.names                                  # Header names for Question 4
+│       ├── index                                          # Index for Question 4
+│       ├── Q6-File1.csv                                   # Dataset for Question 6
+│       └── Q6-File2.csv                                   # Dataset for Question 6
+├── .gitignore                                             # Ignore unnecessary files
+├── notebooks
+│   └── Assignment1.R                                      # R script for the assignment 💻
+├── README.md                                              # This file 📖
+├── reports
+│   ├── Assessment 1 Health Data Science - Donald Philp.pdf   # Final report (PDF) 📄
+│   ├── Assessment 1 Health Data Science - Donald Philp.docx  # Word version for submission 📝
+│   └── HDS-Coursework-Assessment1.pdf                        # Assignment questions and guidelines 📑
+├── indesign                                               # Files used for compiling the final report 📊
+│   └── [InDesign project files]
+└── Assessment 1 Health Data Science - Donald Philp.pdf    # Another copy of the final report in the root folder 🔄
 ```
 
 ---
 
-*Designed by chonkie*
+## 📊 Data
+
+The `data/raw` directory contains the datasets used for the assignment:
+
+- **abalone.data**: Dataset for Question 4.
+- **abalone.names**: Header names for Question 4.
+- **index**: Index file for Question 4.
+- **Q6-File1.csv**: Dataset for Question 6.
+- **Q6-File2.csv**: Dataset for Question 6.
+
+## 📓 Notebooks
+
+The `notebooks` directory contains the R script used for this assignment:
+
+- **Assignment1.R**: The R script containing all the code used to solve the assignment tasks. This script is well-documented and modularized to follow good programming practices. 🖋️
+
+## 📑 Reports
+
+The `reports` directory contains the documents related to this assessment:
+
+- **Assessment 1 Health Data Science - Donald Philp.pdf**: The final compiled report submitted for assessment. 📁
+- **Assessment 1 Health Data Science - Donald Philp.docx**: Word document version for submission requirements.
+- **HDS-Coursework-Assessment1.pdf**: The assignment questions and guidelines provided by the module leader.
+
+## 🚀 Usage
+
+To run the R code:
+
+1. Clone the repository to your local machine:
+
+   ```bash
+   git clone [repository URL]
+   ```
+
+2. Navigate to the `notebooks` directory:
+
+   ```bash
+   cd notebooks
+   ```
+
+3. Open **Assignment1.R** in RStudio or any R-compatible IDE. Make sure the working directory is set correctly:
+
+   ```r
+   setwd("path/to/repository")
+   ```
+
+4. Install the required packages as specified at the top of the `Assignment1.R` script.
+
+5. Run the script to reproduce the analyses and results! 🎉
+
+## 📋 Assignment Overview
+
+The assignment required us to:
+
+- Investigate healthcare challenges using R programming. 💉
+- Apply data science concepts to analyze provided datasets.
+- Document the approach, methods, results, and key findings.
+- Develop solutions in R, following good programming practices.
+
+## 🎓 Learning Outcomes
+
+Through this assignment, I was able to:
+
+- **Understand R Programming Basics**: Learn how to write R scripts for data analysis tasks.
+- **Data Manipulation and Analysis**: Utilize R functions to manipulate and analyze healthcare data.
+- **Problem-Solving Skills**: Apply computational thinking to address healthcare challenges.
+- **Good Programming Practices**: Write modular, clean, and well-documented code. ✨
+- **Communicate Results**: Document the entire process effectively in a structured report.
+
+## 📝 Notes
+
+- The `.gitignore` file ensures that unnecessary files are not added to the repository.
+- The `indesign` directory contains InDesign files used to compile the final report (optional for running the code).
+- A duplicate of the final report PDF is provided in the root directory for easy access.
+- All datasets are included in the `data/raw` directory; no external data sources are required.
+
+## 📧 Contact
+
+For any questions or further information, feel free to reach out:
+
+**Name**: Donald Philp**Email**: [Your Email Address]
+
+*Disclaimer*: This repository is for educational purposes to showcase the work completed for the Health Data Science assignment. Please do not plagiarize or directly copy any part of this work. 🤓✌️
+
+---
+
+Thank you for taking the time to explore my work! 🧠💡 I hope this helps you understand the data analysis involved in the healthcare space. 🚑✨
